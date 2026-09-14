@@ -23,6 +23,9 @@
     ],
     "jei_mod_plugin": [
       "io.github.lbowenwest.fletchery.integration.jei.FletcheryJEIPlugin"
+    ],
+    "emi": [
+      "io.github.lbowenwest.fletchery.integration.emi.FletcheryEmiPlugin"
     ]
   },
   "mixins": [
