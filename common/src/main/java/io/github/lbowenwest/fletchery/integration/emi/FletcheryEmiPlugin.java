@@ -4,6 +4,7 @@ import dev.emi.emi.api.EmiEntrypoint;
 import dev.emi.emi.api.EmiPlugin;
 import dev.emi.emi.api.EmiRegistry;
 import dev.emi.emi.api.recipe.EmiRecipeCategory;
+import dev.emi.emi.api.render.EmiTexture;
 import dev.emi.emi.api.stack.EmiStack;
 import io.github.lbowenwest.fletchery.Fletchery;
 import io.github.lbowenwest.fletchery.FletcheryIdentifier;
@@ -13,9 +14,18 @@ import net.minecraft.world.item.Items;
 
 @EmiEntrypoint
 public class FletcheryEmiPlugin implements EmiPlugin {
+    private static final EmiTexture FLETCHING_TABLE_ICON = new EmiTexture(
+            new FletcheryIdentifier("textures/gui/emi_icon.png"),
+            0, 0,
+            16, 16,
+            16, 16,
+            16, 16
+    );
+
     public static final EmiRecipeCategory FLETCHING_TABLE = new EmiRecipeCategory(
             new FletcheryIdentifier("fletching_table"),
-            EmiStack.of(Items.FLETCHING_TABLE)
+            EmiStack.of(Items.FLETCHING_TABLE),
+            FLETCHING_TABLE_ICON
     );
 
     @Override
