@@ -29,11 +29,8 @@ configurations {
 
 dependencies {
     forge "net.minecraftforge:forge:${rootProject.forge_version}"
-    // Remove the next line if you don't want to depend on the API
     modApi "dev.architectury:architectury-forge:${rootProject.architectury_version}"
 
-//    compileOnly "mezz.jei:jei-${minecraft_version}-common-api:${jei_version}"
-//    runtimeOnly "mezz.jei:jei-${minecraft_version}-forge:${jei_version}"
     modLocalRuntime "dev.emi:emi-forge:${emi_version}+${minecraft_version}"
 
     common(project(path: ":common", configuration: "namedElements")) { transitive false }
@@ -42,14 +39,14 @@ dependencies {
 
 processResources {
     // input variables of this task:
-    var replaceProperties = [
-            minecraft_version    : minecraft_version,
-            mod_id               : mod_id,
-            mod_name             : mod_name,
-            mod_version          : mod_version,
-            mod_description      : mod_description,
-            mod_license          : mod_license,
-            mod_authors          : mod_authors,
+    def replaceProperties = [
+            minecraft_version: minecraft_version,
+            mod_id           : mod_id,
+            mod_name         : mod_name,
+            mod_version      : mod_version,
+            mod_description  : mod_description,
+            mod_license      : mod_license,
+            mod_authors      : mod_authors,
     ]
     // setting them as input
     inputs.properties replaceProperties
