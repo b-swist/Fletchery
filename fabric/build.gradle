@@ -1,5 +1,5 @@
 plugins {
-    id "com.github.johnrengelman.shadow" version "7.1.2"
+    id "com.gradleup.shadow" version "${shadow_version}"
 }
 
 architectury {
@@ -71,9 +71,11 @@ sourcesJar {
     from commonSources.archiveFile.map { zipTree(it) }
 }
 
-components.java {
-    withVariantsFromConfiguration(project.configurations.shadowRuntimeElements) {
-        skip()
+afterEvaluate {
+    components.java {
+        withVariantsFromConfiguration(project.configurations.runtimeElements) {
+            skip()
+        }
     }
 }
 
