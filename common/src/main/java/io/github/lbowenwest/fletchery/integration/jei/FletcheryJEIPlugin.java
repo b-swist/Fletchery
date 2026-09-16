@@ -4,19 +4,20 @@ import io.github.lbowenwest.fletchery.Fletchery;
 import io.github.lbowenwest.fletchery.FletcheryIdentifier;
 import io.github.lbowenwest.fletchery.client.gui.FletchingTableScreen;
 import io.github.lbowenwest.fletchery.client.gui.handler.FletchingTableContainerMenu;
-import io.github.lbowenwest.fletchery.integration.jei.category.FletchingTableCategory;
 import io.github.lbowenwest.fletchery.recipe.FletchingTableRecipe;
 import io.github.lbowenwest.fletchery.registry.FletcheryRecipeTypes;
 import mezz.jei.api.IModPlugin;
+import mezz.jei.api.JeiPlugin;
 import mezz.jei.api.registration.*;
 import net.minecraft.client.Minecraft;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.RecipeManager;
-import net.minecraft.world.level.block.Blocks;
 
 import java.util.List;
 import java.util.Objects;
 
+@JeiPlugin
 public class FletcheryJEIPlugin implements IModPlugin {
     @Override
     public void registerCategories(IRecipeCategoryRegistration registration) {
@@ -33,7 +34,7 @@ public class FletcheryJEIPlugin implements IModPlugin {
 
     @Override
     public void registerRecipeCatalysts(IRecipeCatalystRegistration registration) {
-        registration.addRecipeCatalyst(Blocks.FLETCHING_TABLE.asItem().getDefaultInstance(), FletchingTableCategory.FLETCHING_TABLE);
+        registration.addRecipeCatalyst(Items.FLETCHING_TABLE.getDefaultInstance(), FletchingTableCategory.FLETCHING_TABLE);
     }
 
     @Override
@@ -57,6 +58,7 @@ public class FletcheryJEIPlugin implements IModPlugin {
                 23,
                 FletchingTableCategory.FLETCHING_TABLE);
     }
+
     @Override
     public ResourceLocation getPluginUid() {
         return new FletcheryIdentifier("jei_plugin");
