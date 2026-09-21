@@ -33,7 +33,7 @@ public class FletchingTableEmiRecipe implements EmiRecipe {
 
     @Override
     public EmiRecipeCategory getCategory() {
-        return FletcheryEmiPlugin.FLETCHING_TABLE;
+        return FletcheryEmiPlugin.FLETCHING;
     }
 
     @Override

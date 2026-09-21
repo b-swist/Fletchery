@@ -37,6 +37,6 @@ public class FletchingTableEmiRecipeHandler implements StandardRecipeHandler<Fle
 
     @Override
     public boolean supportsRecipe(EmiRecipe recipe) {
-        return recipe.getCategory() == FletcheryEmiPlugin.FLETCHING_TABLE;
+        return recipe.getCategory() == FletcheryEmiPlugin.FLETCHING;
     }
 }
