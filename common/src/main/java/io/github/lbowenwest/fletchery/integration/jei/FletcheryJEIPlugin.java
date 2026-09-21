@@ -4,8 +4,8 @@ import io.github.lbowenwest.fletchery.Fletchery;
 import io.github.lbowenwest.fletchery.FletcheryIdentifier;
 import io.github.lbowenwest.fletchery.client.gui.FletchingTableScreen;
 import io.github.lbowenwest.fletchery.client.gui.handler.FletchingTableContainerMenu;
+import io.github.lbowenwest.fletchery.registry.FletcheryRecipeType;
 import io.github.lbowenwest.fletchery.recipe.FletchingTableRecipe;
-import io.github.lbowenwest.fletchery.registry.FletcheryRecipeTypes;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
 import mezz.jei.api.registration.*;
@@ -28,7 +28,7 @@ public class FletcheryJEIPlugin implements IModPlugin {
     public void registerRecipes(IRecipeRegistration registration) {
         RecipeManager rm = Objects.requireNonNull(Minecraft.getInstance().level).getRecipeManager();
 
-        List<FletchingTableRecipe> fletchingRecipes = rm.getAllRecipesFor(FletcheryRecipeTypes.FLETCHING_TABLE_RECIPE_TYPE.get());
+        List<FletchingTableRecipe> fletchingRecipes = rm.getAllRecipesFor(FletcheryRecipeType.FLETCHING_TABLE.get());
         registration.addRecipes(FletchingTableCategory.FLETCHING_TABLE, fletchingRecipes);
     }
 

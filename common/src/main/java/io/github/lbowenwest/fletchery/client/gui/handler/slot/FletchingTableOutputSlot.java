@@ -1,12 +1,11 @@
 package io.github.lbowenwest.fletchery.client.gui.handler.slot;
 
-import io.github.lbowenwest.fletchery.registry.FletcheryRecipeTypes;
+import io.github.lbowenwest.fletchery.registry.FletcheryRecipeType;
 import net.minecraft.core.NonNullList;
 import net.minecraft.world.Container;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.CraftingContainer;
 import net.minecraft.world.inventory.Slot;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 
 public class FletchingTableOutputSlot extends Slot {
@@ -36,7 +35,7 @@ public class FletchingTableOutputSlot extends Slot {
 
     @Override
     public void onTake(Player player, ItemStack itemStack) {
-        NonNullList<ItemStack> remaining = player.level().getRecipeManager().getRemainingItemsFor(FletcheryRecipeTypes.FLETCHING_TABLE_RECIPE_TYPE.get(), this.craftSlots, player.level());
+        NonNullList<ItemStack> remaining = player.level().getRecipeManager().getRemainingItemsFor(FletcheryRecipeType.FLETCHING_TABLE.get(), this.craftSlots, player.level());
         for (int i = 0; i < remaining.size(); ++i) {
             ItemStack craftedStack = this.craftSlots.getItem(i);
             ItemStack remainingStack = remaining.get(i);

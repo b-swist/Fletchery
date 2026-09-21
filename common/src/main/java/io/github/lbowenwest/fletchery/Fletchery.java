@@ -4,7 +4,8 @@ import dev.architectury.registry.registries.DeferredRegister;
 import dev.architectury.registry.registries.Registrar;
 import dev.architectury.registry.registries.RegistrySupplier;
 import io.github.lbowenwest.fletchery.client.gui.handler.FletchingTableContainerMenu;
-import io.github.lbowenwest.fletchery.registry.FletcheryRecipeTypes;
+import io.github.lbowenwest.fletchery.registry.FletcheryRecipeSerializer;
+import io.github.lbowenwest.fletchery.registry.FletcheryRecipeType;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.inventory.MenuType;
@@ -17,10 +18,8 @@ public class Fletchery {
             () -> new MenuType<>(FletchingTableContainerMenu::new, FeatureFlags.VANILLA_SET)
     );
 
-//    public static final RegistrySupplier<RecipeType<FletchingTableRecipe>> FLETCHING_TABLE_RECIPE_TYPE =
-
     public static void init() {
-        FletcheryRecipeTypes.init();
-//        System.out.println(FletcheryExpectPlatform.getConfigDirectory().toAbsolutePath().normalize().toString());
+        FletcheryRecipeType.init();
+        FletcheryRecipeSerializer.init();
     }
 }

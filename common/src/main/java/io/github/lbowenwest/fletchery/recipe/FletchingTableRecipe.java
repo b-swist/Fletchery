@@ -2,7 +2,8 @@ package io.github.lbowenwest.fletchery.recipe;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
-import io.github.lbowenwest.fletchery.registry.FletcheryRecipeTypes;
+import io.github.lbowenwest.fletchery.registry.FletcheryRecipeSerializer;
+import io.github.lbowenwest.fletchery.registry.FletcheryRecipeType;
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.network.FriendlyByteBuf;
@@ -90,12 +91,12 @@ public class FletchingTableRecipe implements Recipe<Container> {
 
     @Override
     public RecipeSerializer<?> getSerializer() {
-        return FletcheryRecipeTypes.FLETCHING_TABLE_RECIPE_SERIALIZER.get();
+        return FletcheryRecipeSerializer.FLETCHING_TABLE.get();
     }
 
     @Override
     public RecipeType<?> getType() {
-        return FletcheryRecipeTypes.FLETCHING_TABLE_RECIPE_TYPE.get();
+        return FletcheryRecipeType.FLETCHING_TABLE.get();
     }
 
     public static class Serializer implements RecipeSerializer<FletchingTableRecipe> {
