@@ -6,21 +6,20 @@ import dev.emi.emi.api.render.EmiTexture;
 import dev.emi.emi.api.stack.EmiIngredient;
 import dev.emi.emi.api.stack.EmiStack;
 import dev.emi.emi.api.widget.WidgetHolder;
-import io.github.lbowenwest.fletchery.recipe.FletchingTableRecipe;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.resources.ResourceLocation;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class FletchingTableEmiRecipe implements EmiRecipe {
+public class FletchingRecipe implements EmiRecipe {
     public static final int WIDTH = 82;
     public static final int HEIGHT = 54;
-    private final FletchingTableRecipe recipe;
+    private final io.github.lbowenwest.fletchery.recipe.FletchingRecipe recipe;
     private final List<EmiIngredient> inputs;
     private final EmiStack output;
 
-    public FletchingTableEmiRecipe(FletchingTableRecipe recipe) {
+    public FletchingRecipe(io.github.lbowenwest.fletchery.recipe.FletchingRecipe recipe) {
         this.recipe = recipe;
 
         this.inputs = recipe.getIngredients()

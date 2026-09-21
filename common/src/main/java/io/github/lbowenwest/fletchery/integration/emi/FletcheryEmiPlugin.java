@@ -9,7 +9,7 @@ import dev.emi.emi.api.stack.EmiStack;
 import io.github.lbowenwest.fletchery.FletcheryIdentifier;
 import io.github.lbowenwest.fletchery.registry.FletcheryMenu;
 import io.github.lbowenwest.fletchery.registry.FletcheryRecipeType;
-import io.github.lbowenwest.fletchery.recipe.FletchingTableRecipe;
+import io.github.lbowenwest.fletchery.recipe.FletchingRecipe;
 import net.minecraft.world.item.Items;
 
 @EmiEntrypoint
@@ -32,10 +32,10 @@ public class FletcheryEmiPlugin implements EmiPlugin {
     public void register(EmiRegistry registry) {
         registry.addCategory(FLETCHING);
         registry.addWorkstation(FLETCHING, EmiStack.of(Items.FLETCHING_TABLE));
-        registry.addRecipeHandler(FletcheryMenu.FLETCHING_TABLE.get(), new FletchingTableEmiRecipeHandler());
+        registry.addRecipeHandler(FletcheryMenu.FLETCHING_TABLE.get(), new FletchingRecipeHandler());
 
-        for (FletchingTableRecipe recipe : registry.getRecipeManager().getAllRecipesFor(FletcheryRecipeType.FLETCHING_TABLE.get())) {
-            registry.addRecipe(new FletchingTableEmiRecipe(recipe));
+        for (FletchingRecipe recipe : registry.getRecipeManager().getAllRecipesFor(FletcheryRecipeType.FLETCHING.get())) {
+            registry.addRecipe(new io.github.lbowenwest.fletchery.integration.emi.FletchingRecipe(recipe));
         }
     }
 }

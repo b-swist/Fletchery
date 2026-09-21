@@ -5,7 +5,7 @@ import io.github.lbowenwest.fletchery.client.gui.FletchingScreen;
 import io.github.lbowenwest.fletchery.client.gui.FletchingMenu;
 import io.github.lbowenwest.fletchery.registry.FletcheryMenu;
 import io.github.lbowenwest.fletchery.registry.FletcheryRecipeType;
-import io.github.lbowenwest.fletchery.recipe.FletchingTableRecipe;
+import io.github.lbowenwest.fletchery.recipe.FletchingRecipe;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
 import mezz.jei.api.registration.*;
@@ -21,20 +21,20 @@ import java.util.Objects;
 public class FletcheryJEIPlugin implements IModPlugin {
     @Override
     public void registerCategories(IRecipeCategoryRegistration registration) {
-        registration.addRecipeCategories(new FletchingTableCategory(registration.getJeiHelpers().getGuiHelper()));
+        registration.addRecipeCategories(new FletchingCategory(registration.getJeiHelpers().getGuiHelper()));
     }
 
     @Override
     public void registerRecipes(IRecipeRegistration registration) {
         RecipeManager rm = Objects.requireNonNull(Minecraft.getInstance().level).getRecipeManager();
 
-        List<FletchingTableRecipe> fletchingRecipes = rm.getAllRecipesFor(FletcheryRecipeType.FLETCHING_TABLE.get());
-        registration.addRecipes(FletchingTableCategory.FLETCHING, fletchingRecipes);
+        List<FletchingRecipe> fletchingRecipes = rm.getAllRecipesFor(FletcheryRecipeType.FLETCHING.get());
+        registration.addRecipes(FletchingCategory.FLETCHING, fletchingRecipes);
     }
 
     @Override
     public void registerRecipeCatalysts(IRecipeCatalystRegistration registration) {
-        registration.addRecipeCatalyst(Items.FLETCHING_TABLE.getDefaultInstance(), FletchingTableCategory.FLETCHING);
+        registration.addRecipeCatalyst(Items.FLETCHING_TABLE.getDefaultInstance(), FletchingCategory.FLETCHING);
     }
 
     @Override
@@ -42,7 +42,7 @@ public class FletcheryJEIPlugin implements IModPlugin {
         registration.addRecipeTransferHandler(
                 FletchingMenu.class,
                 FletcheryMenu.FLETCHING_TABLE.get(),
-                FletchingTableCategory.FLETCHING,
+                FletchingCategory.FLETCHING,
                 1,
                 3,
                 4,
@@ -56,7 +56,7 @@ public class FletcheryJEIPlugin implements IModPlugin {
                 32,
                 28,
                 23,
-                FletchingTableCategory.FLETCHING);
+                FletchingCategory.FLETCHING);
     }
 
     @Override

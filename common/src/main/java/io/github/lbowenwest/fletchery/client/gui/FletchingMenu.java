@@ -2,7 +2,7 @@ package io.github.lbowenwest.fletchery.client.gui;
 
 import io.github.lbowenwest.fletchery.registry.FletcheryMenu;
 import io.github.lbowenwest.fletchery.registry.FletcheryRecipeType;
-import io.github.lbowenwest.fletchery.recipe.FletchingTableRecipe;
+import io.github.lbowenwest.fletchery.recipe.FletchingRecipe;
 import net.minecraft.network.protocol.game.ClientboundContainerSetSlotPacket;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.Container;
@@ -72,9 +72,9 @@ public class FletchingMenu extends RecipeBookMenu<CraftingContainer> {
         if (!level.isClientSide) {
             ServerPlayer serverPlayer = (ServerPlayer) player;
             ItemStack itemStack = ItemStack.EMPTY;
-            Optional<FletchingTableRecipe> optional = level.getRecipeManager().getRecipeFor(FletcheryRecipeType.FLETCHING_TABLE.get(), craftingContainer, level);
+            Optional<FletchingRecipe> optional = level.getRecipeManager().getRecipeFor(FletcheryRecipeType.FLETCHING.get(), craftingContainer, level);
             if (optional.isPresent()) {
-                FletchingTableRecipe recipe = optional.get();
+                FletchingRecipe recipe = optional.get();
                 itemStack = recipe.assemble(craftingContainer, level.registryAccess());
             }
             resultContainer.setItem(0, itemStack);

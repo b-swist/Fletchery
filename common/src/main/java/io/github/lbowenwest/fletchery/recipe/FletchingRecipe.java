@@ -18,13 +18,13 @@ import net.minecraft.world.item.alchemy.Potions;
 import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.Level;
 
-public class FletchingTableRecipe implements Recipe<Container> {
+public class FletchingRecipe implements Recipe<Container> {
 
     private final ResourceLocation identifier;
     private final NonNullList<Ingredient> inputs;
     private final ItemStack output;
 
-    public FletchingTableRecipe(ResourceLocation identifier, NonNullList<Ingredient> inputs, ItemStack output) {
+    public FletchingRecipe(ResourceLocation identifier, NonNullList<Ingredient> inputs, ItemStack output) {
         this.identifier = identifier;
         this.inputs = inputs;
         this.output = output;
@@ -91,18 +91,18 @@ public class FletchingTableRecipe implements Recipe<Container> {
 
     @Override
     public RecipeSerializer<?> getSerializer() {
-        return FletcheryRecipeSerializer.FLETCHING_TABLE.get();
+        return FletcheryRecipeSerializer.FLETCHING.get();
     }
 
     @Override
     public RecipeType<?> getType() {
-        return FletcheryRecipeType.FLETCHING_TABLE.get();
+        return FletcheryRecipeType.FLETCHING.get();
     }
 
-    public static class Serializer implements RecipeSerializer<FletchingTableRecipe> {
+    public static class Serializer implements RecipeSerializer<FletchingRecipe> {
 
         @Override
-        public FletchingTableRecipe fromJson(ResourceLocation resourceLocation, JsonObject jsonObject) {
+        public FletchingRecipe fromJson(ResourceLocation resourceLocation, JsonObject jsonObject) {
             final var ingredientsArray = GsonHelper.getAsJsonArray(jsonObject, "ingredients");
             NonNullList<Ingredient> ingredients = NonNullList.create();
             for (int i = 0; i < jsonObject.size(); i++) {
@@ -116,19 +116,19 @@ public class FletchingTableRecipe implements Recipe<Container> {
             } else if (ingredients.size() > 3) {
                 throw new JsonParseException("Too many ingredients for fletching table");
             } else {
-                return new FletchingTableRecipe(resourceLocation, ingredients, ShapedRecipe.itemStackFromJson(GsonHelper.getAsJsonObject(jsonObject, "result")));
+                return new FletchingRecipe(resourceLocation, ingredients, ShapedRecipe.itemStackFromJson(GsonHelper.getAsJsonObject(jsonObject, "result")));
             }
         }
 
         @Override
-        public FletchingTableRecipe fromNetwork(ResourceLocation resourceLocation, FriendlyByteBuf friendlyByteBuf) {
+        public FletchingRecipe fromNetwork(ResourceLocation resourceLocation, FriendlyByteBuf friendlyByteBuf) {
             final var ingredients = NonNullList.withSize(friendlyByteBuf.readVarInt(), Ingredient.EMPTY);
             ingredients.replaceAll(ignored -> Ingredient.fromNetwork(friendlyByteBuf));
-            return new FletchingTableRecipe(resourceLocation, ingredients, friendlyByteBuf.readItem());
+            return new FletchingRecipe(resourceLocation, ingredients, friendlyByteBuf.readItem());
         }
 
         @Override
-        public void toNetwork(FriendlyByteBuf friendlyByteBuf, FletchingTableRecipe recipe) {
+        public void toNetwork(FriendlyByteBuf friendlyByteBuf, FletchingRecipe recipe) {
             friendlyByteBuf.writeVarInt(recipe.inputs.size());
             for (Ingredient ingredient : recipe.inputs) {
                 ingredient.toNetwork(friendlyByteBuf);

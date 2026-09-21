@@ -4,7 +4,7 @@ import dev.architectury.registry.registries.DeferredRegister;
 import dev.architectury.registry.registries.Registrar;
 import dev.architectury.registry.registries.RegistrySupplier;
 import io.github.lbowenwest.fletchery.FletcheryIdentifier;
-import io.github.lbowenwest.fletchery.recipe.FletchingTableRecipe;
+import io.github.lbowenwest.fletchery.recipe.FletchingRecipe;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 
@@ -13,9 +13,9 @@ public class FletcheryRecipeSerializer {
             .create(FletcheryIdentifier.MOD_ID, Registries.RECIPE_SERIALIZER)
             .getRegistrar();
 
-    public static final RegistrySupplier<RecipeSerializer<FletchingTableRecipe>> FLETCHING_TABLE = RECIPE_SERIALIZERS.register(
+    public static final RegistrySupplier<RecipeSerializer<FletchingRecipe>> FLETCHING = RECIPE_SERIALIZERS.register(
             FletcheryIdentifier.of("fletching"),
-            FletchingTableRecipe.Serializer::new
+            FletchingRecipe.Serializer::new
     );
 
     public static void init() {

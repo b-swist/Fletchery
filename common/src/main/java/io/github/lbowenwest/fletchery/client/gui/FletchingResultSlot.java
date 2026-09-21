@@ -30,7 +30,7 @@ public class FletchingResultSlot extends Slot {
 
     @Override
     public void onTake(Player player, ItemStack itemStack) {
-        NonNullList<ItemStack> remaining = player.level().getRecipeManager().getRemainingItemsFor(FletcheryRecipeType.FLETCHING_TABLE.get(), this.craftSlots, player.level());
+        NonNullList<ItemStack> remaining = player.level().getRecipeManager().getRemainingItemsFor(FletcheryRecipeType.FLETCHING.get(), this.craftSlots, player.level());
         for (int i = 0; i < remaining.size(); ++i) {
             ItemStack craftedStack = this.craftSlots.getItem(i);
             ItemStack remainingStack = remaining.get(i);

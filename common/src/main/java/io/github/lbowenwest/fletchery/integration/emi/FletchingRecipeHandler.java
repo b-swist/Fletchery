@@ -9,7 +9,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FletchingTableEmiRecipeHandler implements StandardRecipeHandler<FletchingMenu> {
+public class FletchingRecipeHandler implements StandardRecipeHandler<FletchingMenu> {
     @Override
     public List<Slot> getInputSources(FletchingMenu handler) {
         List<Slot> list = new ArrayList<>();
