@@ -23,8 +23,8 @@ public class FletchingTableCategory implements IRecipeCategory<FletchingTableRec
     private final IDrawable icon;
     private final Component name;
 
-    public static final RecipeType<FletchingTableRecipe> FLETCHING_TABLE = new RecipeType<>(
-            FletcheryIdentifier.of("fletching_table"),
+    public static final RecipeType<FletchingTableRecipe> FLETCHING = new RecipeType<>(
+            FletcheryIdentifier.of("fletching"),
             FletchingTableRecipe.class
     );
 
@@ -36,7 +36,7 @@ public class FletchingTableCategory implements IRecipeCategory<FletchingTableRec
 
     @Override
     public RecipeType<FletchingTableRecipe> getRecipeType() {
-        return FLETCHING_TABLE;
+        return FLETCHING;
     }
 
     @Override

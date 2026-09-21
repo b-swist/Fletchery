@@ -29,12 +29,12 @@ public class FletcheryJEIPlugin implements IModPlugin {
         RecipeManager rm = Objects.requireNonNull(Minecraft.getInstance().level).getRecipeManager();
 
         List<FletchingTableRecipe> fletchingRecipes = rm.getAllRecipesFor(FletcheryRecipeType.FLETCHING_TABLE.get());
-        registration.addRecipes(FletchingTableCategory.FLETCHING_TABLE, fletchingRecipes);
+        registration.addRecipes(FletchingTableCategory.FLETCHING, fletchingRecipes);
     }
 
     @Override
     public void registerRecipeCatalysts(IRecipeCatalystRegistration registration) {
-        registration.addRecipeCatalyst(Items.FLETCHING_TABLE.getDefaultInstance(), FletchingTableCategory.FLETCHING_TABLE);
+        registration.addRecipeCatalyst(Items.FLETCHING_TABLE.getDefaultInstance(), FletchingTableCategory.FLETCHING);
     }
 
     @Override
@@ -42,7 +42,7 @@ public class FletcheryJEIPlugin implements IModPlugin {
         registration.addRecipeTransferHandler(
                 FletchingMenu.class,
                 FletcheryMenu.FLETCHING_TABLE.get(),
-                FletchingTableCategory.FLETCHING_TABLE,
+                FletchingTableCategory.FLETCHING,
                 1,
                 3,
                 4,
@@ -56,7 +56,7 @@ public class FletcheryJEIPlugin implements IModPlugin {
                 32,
                 28,
                 23,
-                FletchingTableCategory.FLETCHING_TABLE);
+                FletchingTableCategory.FLETCHING);
     }
 
     @Override
