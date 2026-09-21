@@ -1,7 +1,7 @@
 package io.github.lbowenwest.fletchery.client.gui.handler;
 
-import io.github.lbowenwest.fletchery.Fletchery;
 import io.github.lbowenwest.fletchery.client.gui.handler.slot.FletchingTableOutputSlot;
+import io.github.lbowenwest.fletchery.registry.FletcheryMenu;
 import io.github.lbowenwest.fletchery.registry.FletcheryRecipeType;
 import io.github.lbowenwest.fletchery.recipe.FletchingTableRecipe;
 import net.minecraft.network.protocol.game.ClientboundContainerSetSlotPacket;
@@ -38,7 +38,7 @@ public class FletchingTableContainerMenu extends RecipeBookMenu<CraftingContaine
     }
 
     public FletchingTableContainerMenu(int i, Inventory inventory, ContainerLevelAccess containerLevelAccess) {
-        super(Fletchery.FLETCHING_TABLE_MENU_HANDLER.get(), i);
+        super(FletcheryMenu.FLETCHING_TABLE.get(), i);
         this.craftSlots = new TransientCraftingContainer(this, 3, 1);
         this.resultSlots = new ResultContainer();
         this.access = containerLevelAccess;

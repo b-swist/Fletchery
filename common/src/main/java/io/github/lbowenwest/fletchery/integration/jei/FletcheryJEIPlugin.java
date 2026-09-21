@@ -1,9 +1,9 @@
 package io.github.lbowenwest.fletchery.integration.jei;
 
-import io.github.lbowenwest.fletchery.Fletchery;
 import io.github.lbowenwest.fletchery.FletcheryIdentifier;
 import io.github.lbowenwest.fletchery.client.gui.FletchingTableScreen;
 import io.github.lbowenwest.fletchery.client.gui.handler.FletchingTableContainerMenu;
+import io.github.lbowenwest.fletchery.registry.FletcheryMenu;
 import io.github.lbowenwest.fletchery.registry.FletcheryRecipeType;
 import io.github.lbowenwest.fletchery.recipe.FletchingTableRecipe;
 import mezz.jei.api.IModPlugin;
@@ -41,7 +41,7 @@ public class FletcheryJEIPlugin implements IModPlugin {
     public void registerRecipeTransferHandlers(IRecipeTransferRegistration registration) {
         registration.addRecipeTransferHandler(
                 FletchingTableContainerMenu.class,
-                Fletchery.FLETCHING_TABLE_MENU_HANDLER.get(),
+                FletcheryMenu.FLETCHING_TABLE.get(),
                 FletchingTableCategory.FLETCHING_TABLE,
                 1,
                 3,
