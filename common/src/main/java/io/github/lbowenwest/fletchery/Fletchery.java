@@ -10,12 +10,10 @@ import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.inventory.MenuType;
 
 public class Fletchery {
-    public static final String MOD_ID = "fletchery";
-
-    public static final Registrar<MenuType<?>> MENUS = DeferredRegister.create(MOD_ID, Registries.MENU).getRegistrar();
+    public static final Registrar<MenuType<?>> MENUS = DeferredRegister.create(FletcheryIdentifier.MOD_ID, Registries.MENU).getRegistrar();
 
     public static final RegistrySupplier<MenuType<FletchingTableContainerMenu>> FLETCHING_TABLE_MENU_HANDLER = MENUS.register(
-            new FletcheryIdentifier("fletching_table_menu"),
+            FletcheryIdentifier.of("fletching_table_menu"),
             () -> new MenuType<>(FletchingTableContainerMenu::new, FeatureFlags.VANILLA_SET)
     );
 

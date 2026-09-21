@@ -15,7 +15,7 @@ import net.minecraft.world.item.Items;
 @EmiEntrypoint
 public class FletcheryEmiPlugin implements EmiPlugin {
     private static final EmiTexture FLETCHING_TABLE_ICON = new EmiTexture(
-            new FletcheryIdentifier("textures/gui/emi_icon.png"),
+            FletcheryIdentifier.of("textures/gui/emi_icon.png"),
             0, 0,
             16, 16,
             16, 16,
@@ -23,7 +23,7 @@ public class FletcheryEmiPlugin implements EmiPlugin {
     );
 
     public static final EmiRecipeCategory FLETCHING_TABLE = new EmiRecipeCategory(
-            new FletcheryIdentifier("fletching_table"),
+            FletcheryIdentifier.of("fletching_table"),
             EmiStack.of(Items.FLETCHING_TABLE),
             FLETCHING_TABLE_ICON
     );

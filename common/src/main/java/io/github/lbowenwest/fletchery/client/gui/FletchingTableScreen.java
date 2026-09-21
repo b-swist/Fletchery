@@ -13,7 +13,7 @@ import net.minecraft.world.entity.player.Inventory;
 @Environment(EnvType.CLIENT)
 public class FletchingTableScreen extends AbstractContainerScreen<FletchingTableContainerMenu> {
 
-    public static ResourceLocation BACKGROUND = new FletcheryIdentifier("textures/gui/fletching_table.png");
+    public static ResourceLocation BACKGROUND = FletcheryIdentifier.of("textures/gui/fletching_table.png");
 
     public FletchingTableScreen(FletchingTableContainerMenu handler, Inventory inventory, Component component) {
         super(handler, inventory, component);

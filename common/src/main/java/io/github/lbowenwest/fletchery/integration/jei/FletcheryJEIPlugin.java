@@ -61,6 +61,6 @@ public class FletcheryJEIPlugin implements IModPlugin {
 
     @Override
     public ResourceLocation getPluginUid() {
-        return new FletcheryIdentifier("jei_plugin");
+        return FletcheryIdentifier.of("jei_plugin");
     }
 }

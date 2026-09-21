@@ -24,7 +24,7 @@ public class FletchingTableCategory implements IRecipeCategory<FletchingTableRec
     private final Component name;
 
     public static final RecipeType<FletchingTableRecipe> FLETCHING_TABLE = new RecipeType<>(
-            new FletcheryIdentifier("fletching_table"),
+            FletcheryIdentifier.of("fletching_table"),
             FletchingTableRecipe.class
     );
 
