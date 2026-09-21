@@ -11,6 +11,6 @@ public class FletcheryForge {
     public FletcheryForge() {
         // Submit our event bus to let architectury register our content on the right time
         EventBuses.registerModEventBus(FletcheryIdentifier.MOD_ID, FMLJavaModLoadingContext.get().getModEventBus());
-        Fletchery.init();
+        Fletchery.onInitialize();
     }
 }

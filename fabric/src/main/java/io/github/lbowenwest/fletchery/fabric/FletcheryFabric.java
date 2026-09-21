@@ -6,6 +6,6 @@ import net.fabricmc.api.ModInitializer;
 public class FletcheryFabric implements ModInitializer {
     @Override
     public void onInitialize() {
-        Fletchery.init();
+        Fletchery.onInitialize();
     }
 }
