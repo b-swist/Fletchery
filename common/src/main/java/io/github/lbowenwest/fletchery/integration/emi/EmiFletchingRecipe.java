@@ -6,28 +6,29 @@ import dev.emi.emi.api.render.EmiTexture;
 import dev.emi.emi.api.stack.EmiIngredient;
 import dev.emi.emi.api.stack.EmiStack;
 import dev.emi.emi.api.widget.WidgetHolder;
-import net.minecraft.core.RegistryAccess;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.crafting.Ingredient;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class FletchingRecipe implements EmiRecipe {
+public class EmiFletchingRecipe implements EmiRecipe {
     public static final int WIDTH = 82;
     public static final int HEIGHT = 54;
-    private final io.github.lbowenwest.fletchery.recipe.FletchingRecipe recipe;
-    private final List<EmiIngredient> inputs;
+    private final List<EmiIngredient> input;
     private final EmiStack output;
+    private final ResourceLocation identifier;
 
-    public FletchingRecipe(io.github.lbowenwest.fletchery.recipe.FletchingRecipe recipe) {
-        this.recipe = recipe;
+    public EmiFletchingRecipe(List<Ingredient> input, ItemStack output, ResourceLocation identifier) {
+        this.identifier = identifier;
 
-        this.inputs = recipe.getIngredients()
-                .stream()
+        this.input = input.stream()
                 .map(EmiIngredient::of)
                 .toList();
 
-        this.output = EmiStack.of(recipe.getResultItem(RegistryAccess.EMPTY));
+        this.output = EmiStack.of(output);
     }
 
     @Override
@@ -37,12 +38,12 @@ public class FletchingRecipe implements EmiRecipe {
 
     @Override
     public @Nullable ResourceLocation getId() {
-        return recipe.getId();
+        return identifier;
     }
 
     @Override
     public List<EmiIngredient> getInputs() {
-        return inputs;
+        return input;
     }
 
     @Override
@@ -62,9 +63,9 @@ public class FletchingRecipe implements EmiRecipe {
 
     @Override
     public void addWidgets(WidgetHolder widgetHolder) {
-        widgetHolder.addSlot(inputs.get(0), 0, 0);
-        widgetHolder.addSlot(inputs.get(1), 0, 18);
-        widgetHolder.addSlot(inputs.get(2), 0, 36);
+        widgetHolder.addSlot(input.get(0), 0, 0);
+        widgetHolder.addSlot(input.get(1), 0, 18);
+        widgetHolder.addSlot(input.get(2), 0, 36);
 
         widgetHolder.addTexture(EmiTexture.EMPTY_ARROW, 24, 18);
 
