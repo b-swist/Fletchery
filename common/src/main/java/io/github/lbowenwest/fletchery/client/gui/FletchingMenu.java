@@ -50,20 +50,18 @@ public class FletchingMenu extends RecipeBookMenu<CraftingContainer> {
 
     private void buildCraftingContainer(Inventory inventory) {
         this.addSlot(new FletchingResultSlot(inventory.player, this.craftSlots, this.resultSlots, 0, 124, 35));
-        int i;
-        for (i = 0; i < 3; ++i) {
+        for (int i = 0; i < 3; ++i) {
             this.addSlot(new Slot(this.craftSlots, i, 48, 17 + i * 18));
         }
     }
 
     private void buildPlayerContainer(Inventory inventory) {
-        int i;
-        for (i = 0; i < 3; ++i) {
+        for (int i = 0; i < 3; ++i) {
             for (int j = 0; j < 9; ++j) {
                 this.addSlot(new Slot(inventory, j + i * 9 + 9, 8 + j * 18, 84 + i * 18));
             }
         }
-        for (i = 0; i < 9; ++i) {
+        for (int i = 0; i < 9; ++i) {
             this.addSlot(new Slot(inventory, i, 8 + i * 18, 142));
         }
     }
