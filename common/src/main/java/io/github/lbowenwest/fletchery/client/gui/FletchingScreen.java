@@ -1,7 +1,6 @@
 package io.github.lbowenwest.fletchery.client.gui;
 
 import io.github.lbowenwest.fletchery.FletcheryIdentifier;
-import io.github.lbowenwest.fletchery.client.gui.handler.FletchingTableContainerMenu;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.gui.GuiGraphics;
@@ -11,11 +10,11 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 
 @Environment(EnvType.CLIENT)
-public class FletchingTableScreen extends AbstractContainerScreen<FletchingTableContainerMenu> {
+public class FletchingScreen extends AbstractContainerScreen<FletchingMenu> {
 
     public static ResourceLocation BACKGROUND = FletcheryIdentifier.of("textures/gui/fletching_table.png");
 
-    public FletchingTableScreen(FletchingTableContainerMenu handler, Inventory inventory, Component component) {
+    public FletchingScreen(FletchingMenu handler, Inventory inventory, Component component) {
         super(handler, inventory, component);
     }
 

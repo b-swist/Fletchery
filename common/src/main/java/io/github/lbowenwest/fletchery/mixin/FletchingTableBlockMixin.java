@@ -1,7 +1,7 @@
 package io.github.lbowenwest.fletchery.mixin;
 
 import dev.architectury.registry.menu.MenuRegistry;
-import io.github.lbowenwest.fletchery.client.gui.handler.FletchingTableContainerMenu;
+import io.github.lbowenwest.fletchery.client.gui.FletchingMenu;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
@@ -40,7 +40,7 @@ public class FletchingTableBlockMixin {
                 @Nullable
                 @Override
                 public AbstractContainerMenu createMenu(int i, Inventory inventory, Player player) {
-                    return new FletchingTableContainerMenu(i, inventory, ContainerLevelAccess.create(level, blockPos));
+                    return new FletchingMenu(i, inventory, ContainerLevelAccess.create(level, blockPos));
                 }
             });
             result.setReturnValue(InteractionResult.CONSUME);

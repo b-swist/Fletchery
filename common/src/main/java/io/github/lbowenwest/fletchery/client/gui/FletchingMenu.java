@@ -1,6 +1,5 @@
-package io.github.lbowenwest.fletchery.client.gui.handler;
+package io.github.lbowenwest.fletchery.client.gui;
 
-import io.github.lbowenwest.fletchery.client.gui.handler.slot.FletchingTableOutputSlot;
 import io.github.lbowenwest.fletchery.registry.FletcheryMenu;
 import io.github.lbowenwest.fletchery.registry.FletcheryRecipeType;
 import io.github.lbowenwest.fletchery.recipe.FletchingTableRecipe;
@@ -19,7 +18,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Optional;
 
-public class FletchingTableContainerMenu extends RecipeBookMenu<CraftingContainer> {
+public class FletchingMenu extends RecipeBookMenu<CraftingContainer> {
     private static final int RESULT_SLOT = 0;
     private static final int CRAFT_SLOT_START = 1;
     private static final int CRAFT_SLOT_END = 4;
@@ -33,11 +32,11 @@ public class FletchingTableContainerMenu extends RecipeBookMenu<CraftingContaine
     private final ContainerLevelAccess access;
     private final Player player;
 
-    public FletchingTableContainerMenu(int i, Inventory inventory) {
+    public FletchingMenu(int i, Inventory inventory) {
         this(i, inventory, ContainerLevelAccess.NULL);
     }
 
-    public FletchingTableContainerMenu(int i, Inventory inventory, ContainerLevelAccess containerLevelAccess) {
+    public FletchingMenu(int i, Inventory inventory, ContainerLevelAccess containerLevelAccess) {
         super(FletcheryMenu.FLETCHING_TABLE.get(), i);
         this.craftSlots = new TransientCraftingContainer(this, 3, 1);
         this.resultSlots = new ResultContainer();
@@ -50,7 +49,7 @@ public class FletchingTableContainerMenu extends RecipeBookMenu<CraftingContaine
     }
 
     private void buildCraftingContainer(Inventory inventory) {
-        this.addSlot(new FletchingTableOutputSlot(inventory.player, this.craftSlots, this.resultSlots, 0, 124, 35));
+        this.addSlot(new FletchingResultSlot(inventory.player, this.craftSlots, this.resultSlots, 0, 124, 35));
         int i;
         for (i = 0; i < 3; ++i) {
             this.addSlot(new Slot(this.craftSlots, i, 48, 17 + i * 18));
@@ -86,9 +85,7 @@ public class FletchingTableContainerMenu extends RecipeBookMenu<CraftingContaine
 
     @Override
     public void slotsChanged(Container container) {
-        this.access.execute(((level, blockPos) -> {
-            slotChangedGrid(this, level, this.player, this.craftSlots, this.resultSlots);
-        }));
+        this.access.execute(((level, blockPos) -> slotChangedGrid(this, level, this.player, this.craftSlots, this.resultSlots)));
     }
 
     @Override
@@ -99,9 +96,7 @@ public class FletchingTableContainerMenu extends RecipeBookMenu<CraftingContaine
             ItemStack originStack = originSlot.getItem();
             resultStack = originStack.copy();
             if (i == RESULT_SLOT) {
-                this.access.execute((level, blockPos) -> {
-                    originStack.getItem().onCraftedBy(originStack, level, player);
-                });
+                this.access.execute((level, blockPos) -> originStack.getItem().onCraftedBy(originStack, level, player));
                 if (!this.moveItemStackTo(originStack, INV_SLOT_START, USE_ROW_SLOT_END, true)) {
                     return ItemStack.EMPTY;
                 }
@@ -154,9 +149,7 @@ public class FletchingTableContainerMenu extends RecipeBookMenu<CraftingContaine
     @Override
     public void removed(Player player) {
         super.removed(player);
-        this.access.execute(((level, blockPos) -> {
-            this.clearContainer(player, this.craftSlots);
-        }));
+        this.access.execute(((level, blockPos) -> this.clearContainer(player, this.craftSlots)));
     }
 
     @Override

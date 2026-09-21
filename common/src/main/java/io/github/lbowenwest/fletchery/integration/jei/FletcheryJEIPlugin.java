@@ -1,8 +1,8 @@
 package io.github.lbowenwest.fletchery.integration.jei;
 
 import io.github.lbowenwest.fletchery.FletcheryIdentifier;
-import io.github.lbowenwest.fletchery.client.gui.FletchingTableScreen;
-import io.github.lbowenwest.fletchery.client.gui.handler.FletchingTableContainerMenu;
+import io.github.lbowenwest.fletchery.client.gui.FletchingScreen;
+import io.github.lbowenwest.fletchery.client.gui.FletchingMenu;
 import io.github.lbowenwest.fletchery.registry.FletcheryMenu;
 import io.github.lbowenwest.fletchery.registry.FletcheryRecipeType;
 import io.github.lbowenwest.fletchery.recipe.FletchingTableRecipe;
@@ -40,7 +40,7 @@ public class FletcheryJEIPlugin implements IModPlugin {
     @Override
     public void registerRecipeTransferHandlers(IRecipeTransferRegistration registration) {
         registration.addRecipeTransferHandler(
-                FletchingTableContainerMenu.class,
+                FletchingMenu.class,
                 FletcheryMenu.FLETCHING_TABLE.get(),
                 FletchingTableCategory.FLETCHING_TABLE,
                 1,
@@ -51,7 +51,7 @@ public class FletcheryJEIPlugin implements IModPlugin {
 
     @Override
     public void registerGuiHandlers(IGuiHandlerRegistration registration) {
-        registration.addRecipeClickArea(FletchingTableScreen.class,
+        registration.addRecipeClickArea(FletchingScreen.class,
                 75,
                 32,
                 28,

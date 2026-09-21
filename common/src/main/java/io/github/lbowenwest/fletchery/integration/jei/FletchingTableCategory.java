@@ -1,7 +1,7 @@
 package io.github.lbowenwest.fletchery.integration.jei;
 
 import io.github.lbowenwest.fletchery.FletcheryIdentifier;
-import io.github.lbowenwest.fletchery.client.gui.FletchingTableScreen;
+import io.github.lbowenwest.fletchery.client.gui.FletchingScreen;
 import io.github.lbowenwest.fletchery.recipe.FletchingTableRecipe;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.drawable.IDrawable;
@@ -30,7 +30,7 @@ public class FletchingTableCategory implements IRecipeCategory<FletchingTableRec
 
     public FletchingTableCategory(IGuiHelper helper) {
         this.name = Component.translatable("jei.fletchery.fletching_table_category");
-        this.background = helper.createDrawable(FletchingTableScreen.BACKGROUND, 47, 16, WIDTH, HEIGHT);
+        this.background = helper.createDrawable(FletchingScreen.BACKGROUND, 47, 16, WIDTH, HEIGHT);
         this.icon = helper.createDrawableItemStack(Items.FLETCHING_TABLE.getDefaultInstance());
     }
 

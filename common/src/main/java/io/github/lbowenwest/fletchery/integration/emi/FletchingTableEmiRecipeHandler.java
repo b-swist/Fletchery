@@ -2,16 +2,16 @@ package io.github.lbowenwest.fletchery.integration.emi;
 
 import dev.emi.emi.api.recipe.EmiRecipe;
 import dev.emi.emi.api.recipe.handler.StandardRecipeHandler;
-import io.github.lbowenwest.fletchery.client.gui.handler.FletchingTableContainerMenu;
+import io.github.lbowenwest.fletchery.client.gui.FletchingMenu;
 import net.minecraft.world.inventory.Slot;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class FletchingTableEmiRecipeHandler implements StandardRecipeHandler<FletchingTableContainerMenu> {
+public class FletchingTableEmiRecipeHandler implements StandardRecipeHandler<FletchingMenu> {
     @Override
-    public List<Slot> getInputSources(FletchingTableContainerMenu handler) {
+    public List<Slot> getInputSources(FletchingMenu handler) {
         List<Slot> list = new ArrayList<>();
 
         for (int i = 1; i < 40; i++) {
@@ -22,7 +22,7 @@ public class FletchingTableEmiRecipeHandler implements StandardRecipeHandler<Fle
     }
 
     @Override
-    public List<Slot> getCraftingSlots(FletchingTableContainerMenu handler) {
+    public List<Slot> getCraftingSlots(FletchingMenu handler) {
         List<Slot> list = new ArrayList<>();
         for (int i = 1; i < 4; i++) {
             list.add(handler.getSlot(i));
@@ -31,7 +31,7 @@ public class FletchingTableEmiRecipeHandler implements StandardRecipeHandler<Fle
     }
 
     @Override
-    public @Nullable Slot getOutputSlot(FletchingTableContainerMenu handler) {
+    public @Nullable Slot getOutputSlot(FletchingMenu handler) {
         return handler.getSlot(0);
     }
 

@@ -1,4 +1,4 @@
-package io.github.lbowenwest.fletchery.client.gui.handler.slot;
+package io.github.lbowenwest.fletchery.client.gui;
 
 import io.github.lbowenwest.fletchery.registry.FletcheryRecipeType;
 import net.minecraft.core.NonNullList;
@@ -8,12 +8,11 @@ import net.minecraft.world.inventory.CraftingContainer;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 
-public class FletchingTableOutputSlot extends Slot {
+public class FletchingResultSlot extends Slot {
     private final CraftingContainer craftSlots;
     private final Player player;
-    private int removeCount;
 
-    public FletchingTableOutputSlot(Player player, CraftingContainer craftingContainer, Container container, int i, int j, int k) {
+    public FletchingResultSlot(Player player, CraftingContainer craftingContainer, Container container, int i, int j, int k) {
         super(container, i, j, k);
         this.player = player;
         this.craftSlots = craftingContainer;
@@ -24,12 +23,8 @@ public class FletchingTableOutputSlot extends Slot {
         return false;
     }
 
-
     @Override
     public ItemStack remove(int i) {
-        if (this.hasItem()) {
-            this.removeCount += Math.min(i, this.getItem().getCount());
-        }
         return super.remove(i);
     }
 
