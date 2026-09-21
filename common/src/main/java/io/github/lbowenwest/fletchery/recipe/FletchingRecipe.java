@@ -1,5 +1,6 @@
 package io.github.lbowenwest.fletchery.recipe;
 
+import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import io.github.lbowenwest.fletchery.registry.FletcheryRecipeSerializer;
@@ -10,7 +11,6 @@ import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.GsonHelper;
 import net.minecraft.world.Container;
-import net.minecraft.world.entity.player.StackedContents;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.alchemy.PotionUtils;
@@ -21,29 +21,25 @@ import net.minecraft.world.level.Level;
 public class FletchingRecipe implements Recipe<Container> {
 
     private final ResourceLocation identifier;
-    private final NonNullList<Ingredient> inputs;
+    private final NonNullList<Ingredient> input;
     private final ItemStack output;
 
-    public FletchingRecipe(ResourceLocation identifier, NonNullList<Ingredient> inputs, ItemStack output) {
+    public FletchingRecipe(ResourceLocation identifier, NonNullList<Ingredient> input, ItemStack output) {
         this.identifier = identifier;
-        this.inputs = inputs;
+        this.input = input;
         this.output = output;
     }
 
     @Override
     public boolean matches(Container container, Level level) {
-        // TODO currently allows ingredients in any order which isn't great
-        StackedContents recipeMatcher = new StackedContents();
-        int matchingStacks = 0;
-
         for (int i = 0; i < 3; ++i) {
             ItemStack itemStack = container.getItem(i);
-            if (!itemStack.isEmpty()) {
-                ++matchingStacks;
-                recipeMatcher.accountStack(itemStack, 1);
+            Ingredient expected = this.input.get(i);
+            if (!expected.test(itemStack)) {
+                return false;
             }
         }
-        return matchingStacks == this.inputs.size() && recipeMatcher.canCraft(this, null);
+        return true;
     }
 
     @Override
@@ -71,7 +67,7 @@ public class FletchingRecipe implements Recipe<Container> {
 
     @Override
     public NonNullList<Ingredient> getIngredients() {
-        return this.inputs;
+        return this.input;
     }
 
     @Override
@@ -103,21 +99,23 @@ public class FletchingRecipe implements Recipe<Container> {
 
         @Override
         public FletchingRecipe fromJson(ResourceLocation resourceLocation, JsonObject jsonObject) {
-            final var ingredientsArray = GsonHelper.getAsJsonArray(jsonObject, "ingredients");
-            NonNullList<Ingredient> ingredients = NonNullList.create();
+            JsonArray ingredients = GsonHelper.getAsJsonArray(jsonObject, "ingredients");
+            NonNullList<Ingredient> input = NonNullList.create();
             for (int i = 0; i < jsonObject.size(); i++) {
-                Ingredient ingredient = Ingredient.fromJson(ingredientsArray.get(i));
+                Ingredient ingredient = Ingredient.fromJson(ingredients.get(i));
                 if (!ingredient.isEmpty()) {
-                    ingredients.add(ingredient);
+                    input.add(ingredient);
                 }
             }
-            if (ingredients.isEmpty()) {
+
+            if (input.isEmpty()) {
                 throw new JsonParseException("No ingredients for fletching table");
-            } else if (ingredients.size() > 3) {
+            } else if (input.size() > 3) {
                 throw new JsonParseException("Too many ingredients for fletching table");
-            } else {
-                return new FletchingRecipe(resourceLocation, ingredients, ShapedRecipe.itemStackFromJson(GsonHelper.getAsJsonObject(jsonObject, "result")));
             }
+
+            ItemStack output = ShapedRecipe.itemStackFromJson(GsonHelper.getAsJsonObject(jsonObject, "result"));
+            return new FletchingRecipe(resourceLocation, input, output);
         }
 
         @Override
@@ -129,8 +127,8 @@ public class FletchingRecipe implements Recipe<Container> {
 
         @Override
         public void toNetwork(FriendlyByteBuf friendlyByteBuf, FletchingRecipe recipe) {
-            friendlyByteBuf.writeVarInt(recipe.inputs.size());
-            for (Ingredient ingredient : recipe.inputs) {
+            friendlyByteBuf.writeVarInt(recipe.input.size());
+            for (Ingredient ingredient : recipe.input) {
                 ingredient.toNetwork(friendlyByteBuf);
             }
             friendlyByteBuf.writeItem(recipe.output);
